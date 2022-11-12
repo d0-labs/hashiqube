@@ -75,6 +75,16 @@ plugin "raw_exec" {
 consul {
   address = "10.9.99.10:8500"
 }
+
+vault {
+  enabled = true
+  address = "http://10.9.99.10:8200"
+  task_token_ttl = "1h"
+  create_from_role = "nomad-cluster"
+  token = "${VAULT_TOKEN}"
+  tls_skip_verify = true
+}
+
 EOF
 
 # Base64-encode password
