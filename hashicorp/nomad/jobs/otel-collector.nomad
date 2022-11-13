@@ -29,9 +29,11 @@ job "otel-collector" {
         to = 8888
       }
       port "otlp" {
+        static = 4317
         to = 4317
       }
       port "otlphttp" {
+        static = 4318
         to = 4318
       }
       port "zipkin" {
@@ -133,17 +135,17 @@ EOH
         port = "zipkin"
         tags = ["zipkin"]
       }
-      service {
-        name = "opentelemetry-collector"
-        port = "healthcheck"
-        tags = ["health"]
-        check {
-          type     = "http"
-          path     = "/"
-          interval = "15s"
-          timeout  = "3s"
-        }
-      }
+      // service {
+      //   name = "opentelemetry-collector"
+      //   port = "healthcheck"
+      //   tags = ["health"]
+      //   check {
+      //     type     = "http"
+      //     path     = "/"
+      //     interval = "15s"
+      //     timeout  = "3s"
+      //   }
+      // }
       service {
         name = "opentelemetry-collector"
         port = "jaeger-grpc"
