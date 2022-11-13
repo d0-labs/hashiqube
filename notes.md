@@ -12,27 +12,4 @@
     127.0.0.1   otel-collector-grpc.localhost
     ```
 
-3. We need to expose the ports used by our apps to the Dockerfile. 
-
-    For example, for the OTel Collector, we need `4317` and `4318`. We would normally set these ports in the job spec like this:
-
-    ```h
-    port "otlp" {
-        to = 4317
-    }
-    ```
-
-    Nomad would assign a dynamic port on the container end, and would map it to host port `4317`. But we need to know both ports, so that we can expose it in our dockerfile (via Vagrantfile). Do do this, we must modify it as follows:
-
-    ```h
-    port "otlp" {
-        static = 4317
-        to = 4317
-    }
-    ```
-
-    This also means that our OTel Collector is available:
-    * Via gRPC at `otel-collector-grpc.localhost:4317`
-    * Via HTTP at `otel-collector-grpc.localhost:4318` or `otel-collector-grpc.localhost:7233`
-
-    In Traefik, we have configured gRPC to go through `7233`, but because we're specifying both `to` and `static` to go to `4317`, we can use either `4317` or `7233`.
+3. We need to expose the gRPC port used by Traefik (i.e. 7233) in our Vagrantfile, in order to send telemetry to the OTel Collector via gRPC, or for any other app which uses gRPC.
