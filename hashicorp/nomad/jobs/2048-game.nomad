@@ -18,6 +18,7 @@ job "2048-game" {
     }
 
     service {
+      provider = "nomad"
       tags = [
         "traefik.http.routers.2048-game.rule=Host(`2048-game.localhost`)",
         "traefik.http.routers.2048-game.entrypoints=web",

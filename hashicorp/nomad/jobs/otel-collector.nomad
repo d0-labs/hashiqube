@@ -124,11 +124,13 @@ EOH
         memory = 512
       }
       service {
+        provider = "nomad"
         name = "opentelemetry-collector"
         port = "metrics"
         tags = ["prometheus"]
       }
       service {
+        provider = "nomad"
         name = "opentelemetry-collector"
         port = "zipkin"
         tags = ["zipkin"]
@@ -145,16 +147,19 @@ EOH
       //   }
       // }
       service {
+        provider = "nomad"
         name = "opentelemetry-collector"
         port = "jaeger-grpc"
         tags = ["jaeger-grpc"]
       }
       service {
+        provider = "nomad"
         name = "opentelemetry-collector"
         port = "jaeger-thrift-http"
         tags = ["jaeger-thrift-http"]
       }
       service {
+        provider = "nomad"
         name = "opentelemetry-collector"
         port = "zpages"
         tags = ["zpages"]
@@ -162,6 +167,7 @@ EOH
 
       
       service {
+        provider = "nomad"
         tags = [
           "traefik.tcp.routers.otel-collector-grpc.rule=HostSNI(`*`)",
           "traefik.tcp.routers.otel-collector-grpc.entrypoints=grpc",
@@ -171,6 +177,7 @@ EOH
       }
 
       service {
+        provider = "nomad"
         tags = [
           "traefik.http.routers.otel-collector-http.rule=Host(`otel-collector-http.localhost`)",
           "traefik.http.routers.otel-collector-http.entrypoints=web",

@@ -111,9 +111,6 @@ Vagrant::configure("2") do |config|
         config.vm.network "forwarded_port", guest: 8082, host: 8082 # traefik metrics
 
         config.vm.network "forwarded_port", guest: 7233, host: 7233 # OTel collector gRPC (traefik mapping)
-        # config.vm.network "forwarded_port", guest: 4317, host: 7233 # OTel collector gRPC (traefik mapping)
-        # config.vm.network "forwarded_port", guest: 4317, host: 4317 # OTel collector gRPC
-        # config.vm.network "forwarded_port", guest: 4318, host: 4318 # OTel collector HTTP
 
       end
 
