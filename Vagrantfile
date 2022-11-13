@@ -68,11 +68,8 @@ Vagrant::configure("2") do |config|
       config.ssh.forward_agent = true
       config.ssh.insert_key = true
       config.ssh.connect_timeout = 60
-      # config.ssh.host = "127.0.0.1" # docker on windows tries to ssh to 0.0.0.0
+      config.ssh.host = "127.0.0.1" # docker on windows tries to ssh to 0.0.0.0
       config.vm.network "private_network", ip: "#{machine[:ip]}"
-      # config.vm.network "public_network", ip: "#{machine[:ip]}", docker_network__gateway: "192.168.50.1", docker_network__subnet: "192.168.50.1/24", docker_network__ip_range: "192.168.50.252/24"
-      # config.vm.network "public_network", ip: "#{machine[:ip]}", name: "mybridge"
-      # config.vm.network "private_network", ip: "#{machine[:ip]}", name: "mybridge"
       config.vm.network "forwarded_port", guest: 22, host: machine[:ssh_port], id: 'ssh', auto_correct: true
 
       if machines.size == 1 # only expose these ports if 1 machine, else conflicts
@@ -113,6 +110,7 @@ Vagrant::configure("2") do |config|
         config.vm.network "forwarded_port", guest: 80, host: 80 # traefik dashboard
         config.vm.network "forwarded_port", guest: 8082, host: 8082 # traefik metrics
 
+        config.vm.network "forwarded_port", guest: 4317, host: 7233 # OTel collector gRPC (traefik mapping)
         config.vm.network "forwarded_port", guest: 4317, host: 4317 # OTel collector gRPC
         config.vm.network "forwarded_port", guest: 4318, host: 4318 # OTel collector HTTP
 

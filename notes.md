@@ -33,6 +33,6 @@
 
     This also means that our OTel Collector is available:
     * Via gRPC at `otel-collector-grpc.localhost:4317`
-    * Via HTTP at `otel-collector-grpc.localhost:4318`
+    * Via HTTP at `otel-collector-grpc.localhost:4318` or `otel-collector-grpc.localhost:7233`
 
-    In Traefik, we have configured gRPC to go through `7233`, but because we're specifying both `to` and `static` to go to `4317`, the `7233` config is ignored.
+    In Traefik, we have configured gRPC to go through `7233`, but because we're specifying both `to` and `static` to go to `4317`, we can use either `4317` or `7233`.
